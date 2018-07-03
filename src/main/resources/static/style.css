@@ -13,3 +13,8 @@
     width: 600px;
     margin-left: -300px;
 }
+
+table{
+    table-layout:fixed;
+}
+
