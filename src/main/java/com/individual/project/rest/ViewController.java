@@ -1,4 +1,4 @@
-package com.individual.project;
+package com.individual.project.rest;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,11 +8,14 @@ import java.util.Date;
 
 @Controller
 public class ViewController {
-
+/*
     @RequestMapping("/")
     public String index(Model model){
+        model.addAttribute("datetime", new Date());
+        model.addAttribute("username", "ChrisVonVolotor");
+        model.addAttribute("mode", "production");
         return "Index";
     }
 
-
+*/
 }

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>User Management</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="react.min.js"></script>
+    <script src="react-dom.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.23/browser.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.1.3/toastr.min.js"></script>​
+
+
+    <link rel="stylesheet" href="bootstrap.css">
+
+</head>
+<body>
+
+<div id='root'></div>
+
+<script type="text/babel" >
+   // const React = require('react');
+   // const ReactDOM = require('react-dom');
+
+    var USERS = [
+        { accountNumber: 1, firstName: "billy", lastName: "Bob" },
+        { accountNumber: 2, firstName: "milly", lastName: "Bob" },
+        { accountNumber: 3, firstName: "dilly", lastName: "Bob" },
+
+    ];
+
+
+
+    var Users = React.createClass({
+        getInitialState: function() {
+            return {display: true };
+        },
+        handleDelete() {
+            var self = this;
+            $.ajax({
+                url: "http://localhost:8080/users/delete/" + this.props.user.accountNumber,
+                type: 'POST',
+                success: function(result) {
+                    self.setState({display: false});
+                },
+                error: function(xhr, ajaxOptions, thrownError) {
+                    toastr.error(xhr.responseJSON.message);
+                }
+            });
+        },
+        render: function() {
+            if (this.state.display==false) return null;
+            else return (
+                <tr>
+                <td>{this.props.user.accountNumber}</td>
+                <td>{this.props.user.firstName}</td>
+                <td>{this.props.user.lastName}</td>
+                <td>
+                    <button className="btn btn-danger" onClick={this.handleDelete}>Delete</button>
+                </td>
+            </tr>);
+        }
+    });
+
+
+    var UsersTable = React.createClass({
+        render: function () {
+            let rows = [];
+            this.props.usersList.forEach(function (user) {
+                rows.push(<Users user={user}/>);
+            });
+            return (
+                <div className="container">
+                <table className="table table-striped">
+                <thead>
+                <tr>
+                    <th>AccNo</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                </tr>
+                </thead>
+                <tbody>{rows}</tbody>
+            </table>
+                </div>);
+        }
+    });
+
+
+
+
+
+   var App = React.createClass({
+
+       loadUsersFromServer: function () {
+           var self = this;
+           $.ajax({
+               url: "http://localhost:8080/users/all"
+           }).then(function (data) {
+               console.log(data);
+               self.setState({usersList: data});
+
+           });
+       },
+
+       getInitialState: function () {
+           return {usersList: []};
+       },
+
+       componentDidMount: function () {
+           this.loadUsersFromServer();
+       },
+
+       render() {
+           return (<UsersTable usersList={this.state.usersList}/>);
+       }
+   });
+
+   ReactDOM.render(<App />, document.getElementById('root') );
+
+</script>
+
+</body>
+</html>

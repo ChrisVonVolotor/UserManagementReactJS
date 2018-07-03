@@ -1,4 +1,4 @@
-package com.individual.project;
+package com.individual.project.Users;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -42,5 +42,10 @@ public class UserCreation {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    @Override
+    public String toString() {
+        return getAccountNumber() + ": " + getUserFullName();
     }
 }

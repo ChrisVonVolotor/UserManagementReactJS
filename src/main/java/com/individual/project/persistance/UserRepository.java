@@ -1,5 +1,6 @@
-package com.individual.project;
+package com.individual.project.persistance;
 
+import com.individual.project.Users.UserCreation;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
