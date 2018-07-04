@@ -26,25 +26,25 @@ public class UserController {
 
     @RequestMapping(value = Constants.SEARCH_ALL, method = RequestMethod.GET)
     public List<UserCreation> getByFullName(@PathVariable String partial){
-      return userRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(partial, partial);
+      return userRepository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCaseOrderByAccountNumber(partial, partial);
 
 
     }
 
     @RequestMapping(value = Constants.SEARCH_FIRST_NAME, method = RequestMethod.GET)
     public List<UserCreation> getByFirstName(@PathVariable String partial){
-        return userRepository.findByFirstNameContainingIgnoreCase(partial);
+        return userRepository.findByFirstNameContainingIgnoreCaseOrderByFirstName(partial);
     }
 
     @RequestMapping(value = Constants.SEARCH_LAST_NAME, method = RequestMethod.GET)
     public List<UserCreation> getByLastName(@PathVariable String partial){
-        return userRepository.findByLastNameContainingIgnoreCase(partial);
+        return userRepository.findByLastNameContainingIgnoreCaseOrderByLastName(partial);
 
     }
 
     @RequestMapping(value = Constants.SEARCH_ACCOUNT_NUMBER, method = RequestMethod.GET)
     public List<UserCreation> getByAccountNumber(@PathVariable long exact){
-        return userRepository.findByAccountNumber(exact);
+        return userRepository.findByAccountNumberOrderByAccountNumber(exact);
     }
 
     @RequestMapping(value = Constants.CREATE_USER, method = RequestMethod.POST)
