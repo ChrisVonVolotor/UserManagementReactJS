@@ -1,3 +1,5 @@
+const SELECTSTYLE = {fontFamily: 'FontAwesome, Helvetica Neue, sans-serif'};
+
 var Users = React.createClass({
     getInitialState: function() {
         return {display: true,
@@ -52,7 +54,7 @@ var Users = React.createClass({
         if (this.state.display==false) return null;
         else return (
             <tr>
-                <td className="td">{this.props.user.accountNumber}</td>
+                <th scope="row" className="td">{this.props.user.accountNumber}</th>
                 <td className="td">{this.props.user.firstName}</td>
                 <td className="td">{this.props.user.lastName}</td>
                 <td>
@@ -67,7 +69,7 @@ var Users = React.createClass({
         if (this.state.display==false) return null;
         else return (
             <tr>
-                <td>{this.props.user.accountNumber}</td>
+                <th scope="row">{this.props.user.accountNumber}</th>
                 <td className="td"><input ref="newFName" defaultValue={this.props.user.firstName}/></td>
                 <td className="td"><input ref="newLName" defaultValue={this.props.user.lastName}/></td>
                 <td>
@@ -199,32 +201,55 @@ var UsersTable = React.createClass({
         //var rows[] = this.props.rows;
         return (
             <div className="container">
-                <h1><i className="fas fas-address-book"/> {languageJSON.title}</h1>
+                <h1><i className="fa fa-address-book"/> {languageJSON.title}</h1>
                 <form className="form-group">
                     <div className="radio-button mbody" onChange={this.setSearch.bind(this)}>
                         <label className="form-check-label" htmlFor="SearchAll"> {languageJSON.fullName} <input type="radio" value="SearchAll" id="SearchAll" name="searchType" defaultChecked/>&nbsp;&nbsp;</label>
                         <label className="form-check-label" htmlFor="SearchFirst"> {languageJSON.fName} <input type="radio" value="SearchFirst" id="SearchFirst" name="searchType"/>&nbsp;&nbsp;</label>
                         <label className="form-check-label" htmlFor="SearchLast"> {languageJSON.lName} <input type="radio" value="SearchLast" id="SearchLast" name="searchType"/>&nbsp;&nbsp;</label>
-                        <select id="selectBox" className="form-control-sm float-right" onChange={this.changeLanguage} defaultValue={this.state.language}>
-                            <option value="ar">عربى</option>
-                            <option value="bg">български</option>
-                            <option value="de">Deutsche</option>
-                            <option value="en">English</option>
-                            <option value="es">Español</option>
-                            <option value="fr">français</option>
-                            <option value="sg">gàidhlig</option>
-                            <option value="he">עִברִית</option>
-                            <option value="hi">हिंदी</option>
-                            <option value="it">italiano</option>
-                            <option value="jp">日本語</option>
-                            <option value="ko">중국말</option>
-                            <option value="po">Polskie</option>
-                            <option value="pt">Português</option>
-                            <option value="ro">Română</option>
-                            <option value="ru">русский</option>
-                            <option value="sw">Kiswahili</option>
-                            <option value="wl">Cymraeg</option>
-                            <option value="zh">中文</option>
+                        <select style={SELECTSTYLE} id="selectBox" className="form-control-sm float-right" onChange={this.changeLanguage} defaultValue={this.state.language}>
+                            <option value="am">&#xf1ab; &nbsp; አማርኛ</option>
+                            <option value="ar">&#xf1ab; &nbsp;عربى </option>
+                            <option value="bg">&#xf1ab; &nbsp; български</option>
+                            <option value="ca">&#xf1ab; &nbsp; català</option>
+                            <option value="cz">&#xf1ab; &nbsp; čeština</option>
+                            <option value="da">&#xf1ab; &nbsp; dansk</option>
+                            <option value="de">&#xf1ab; &nbsp; Deutsche</option>
+                            <option value="el">&#xf1ab; &nbsp; Ελληνικά</option>
+                            <option value="en">&#xf1ab; &nbsp; English</option>
+                            <option value="eo">&#xf1ab; &nbsp; Esperanto</option>
+                            <option value="es">&#xf1ab; &nbsp; Español</option>
+                            <option value="et">&#xf1ab; &nbsp; eesti keel</option>
+                            <option value="eu">&#xf1ab; &nbsp; Euskal</option>
+                            <option value="fi">&#xf1ab; &nbsp; Suomi</option>
+                            <option value="fr">&#xf1ab; &nbsp; français</option>
+                            <option value="fy">&#xf1ab; &nbsp; frisian</option>
+                            <option value="sg">&#xf1ab; &nbsp; gàidhlig</option>
+                            <option value="gl">&#xf1ab; &nbsp; Galego</option>
+                            <option value="hi">&#xf1ab; &nbsp; िंदी</option>
+                            <option value="hr">&#xf1ab; &nbsp; Hrvatska</option>
+                            <option value="hu">&#xf1ab; &nbsp; Magyar</option>
+                            <option value="is">&#xf1ab; &nbsp; íslensku</option>
+                            <option value="it">&#xf1ab; &nbsp; italiano</option>
+                            <option value="iw">&#xf1ab; &nbsp; עִברִית </option>
+                            <option value="jp">&#xf1ab; &nbsp; 日本語</option>
+                            <option value="ka">&#xf1ab; &nbsp; ქართული</option>
+                            <option value="ko">&#xf1ab; &nbsp; 중국말</option>
+                            <option value="la">&#xf1ab; &nbsp; Latine</option>
+                            <option value="lt">&#xf1ab; &nbsp; latviešu</option>
+                            <option value="lv">&#xf1ab; &nbsp; latviešu</option>
+                            <option value="mn">&#xf1ab; &nbsp; Чех</option>
+                            <option value="ms">&#xf1ab; &nbsp; Melayu</option>
+                            <option value="nl">&#xf1ab; &nbsp; Nederlands</option>
+                            <option value="no">&#xf1ab; &nbsp; norsk</option>
+                            <option value="po">&#xf1ab; &nbsp; Polskie</option>
+                            <option value="pt">&#xf1ab; &nbsp; Português</option>
+                            <option value="ro">&#xf1ab; &nbsp; Română</option>
+                            <option value="ru">&#xf1ab; &nbsp; русский</option>
+                            <option value="sv">&#xf1ab; &nbsp; svenska</option>
+                            <option value="sw">&#xf1ab; &nbsp; Kiswahili</option>
+                            <option value="wl">&#xf1ab; &nbsp; Cymraeg</option>
+                            <option value="zh">&#xf1ab; &nbsp; 中文</option>
                         </select>
                     </div>
                     <br/>
@@ -233,15 +258,15 @@ var UsersTable = React.createClass({
                 <table className="table table-striped table-hover">
                     <thead>
                     <tr>
-                        <th>{languageJSON.accNo}</th>
-                        <th>{languageJSON.fName}</th>
-                        <th>{languageJSON.lName}</th>
-                        <th><i className="fas fa-cog fa-spin"/> {languageJSON.config}</th>
+                        <th scope="col">{languageJSON.accNo}</th>
+                        <th scope="col">{languageJSON.fName}</th>
+                        <th scope="col">{languageJSON.lName}</th>
+                        <th scope="col"><i className="fas fa-cog fa-spin"/> {languageJSON.config}</th>
                     </tr>
                     </thead>
                     <tbody>{rows}
                     <tr>
-                        <td><i className="fas fa-asterisk text-muted" /></td>
+                        <td scope="row"><i className="fas fa-asterisk text-muted" /></td>
                         <td className="td"><input id="newFName" ref="newUserFName"/></td>
                         <td className="td"><input id="newLName" ref="newUserLName"/></td>
                         <td>

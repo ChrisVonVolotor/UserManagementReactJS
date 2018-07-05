@@ -21,6 +21,11 @@
 
 table{
     table-layout:fixed;
-
+}
+select{
+    font-family: FontAwesome, sans-serif;
+}
+option{
+    font-family: FontAwesome, sans-serif;
 }
 
