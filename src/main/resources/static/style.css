@@ -14,7 +14,13 @@
     margin-left: -300px;
 }
 
+.container
+{
+    width: 95%;
+}
+
 table{
     table-layout:fixed;
+
 }
 

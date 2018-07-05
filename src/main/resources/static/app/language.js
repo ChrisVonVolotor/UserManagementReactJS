@@ -207,7 +207,7 @@ function changeLanguage(language) {
         var DELETE = "Usuń";
         var SAVE = "Zapisz";
         var CANCEL = "Anuluj";
-    }else if(language = "hi"){
+    }else if(language == "hi"){
         var ACCOUNT_NO = "खाता संख्या";
         var FIRST_NAME = "पहला नाम";
         var FULL_NAME = "पूर्ण नाम";
@@ -221,6 +221,62 @@ function changeLanguage(language) {
         var DELETE = "हटाएं";
         var SAVE = "सहेजें";
         var CANCEL = "रद्द करें";
+    }else if(language == "de" ){
+        var ACCOUNT_NO = "Konto Nr.";
+        var FIRST_NAME = "Vorname";
+        var FULL_NAME = "Vollständiger Name";
+        var LAST_NAME = "Nachname";
+        var CONFIG = "Konfiguration";
+        var ADD = "Hinzufügen";
+        var SEARCH = "Suchen";
+        var USER_MANAGER = "Benutzermanager";
+        var ALERT = "Bitte geben Sie einen Vor- und Nachnamen ein";
+        var EDIT = "Bearbeiten";
+        var DELETE = "Löschen";
+        var SAVE = "Speichern";
+        var CANCEL = "Abbrechen";
+    }else if(language == "hb"){
+        var ACCOUNT_NO = "חשבון לא";
+        var FIRST_NAME = "שם פרטי";
+        var FULL_NAME = "שם מלא";
+        var LAST_NAME = "שם משפחה";
+        var CONFIG = "תצורה";
+        var ADD = "הוסף";
+        var SEARCH = "חפש";
+        var USER_MANAGER = "מנהל משתמש";
+        var ALERT = "נא להזין שם פרטי ושם משפחה";
+        var EDIT = "ערוך";
+        var DELETE = "מחק";
+        var SAVE = "שמור";
+        var CANCEL = "ביטול";
+    }else if (language == "wl"){
+        var ACCOUNT_NO = "Rhif y Cyfrif";
+        var FIRST_NAME = "Enw Cyntaf";
+        var FULL_NAME = "Enw Llawn";
+        var LAST_NAME = "Enw olaf";
+        var CONFIG = "Ffurfweddiad";
+        var ADD = "Ychwanegu";
+        var SEARCH = "Chwilio";
+        var USER_MANAGER = "Rheolwr Defnyddiwr";
+        var ALERT = "Rhowch enw cyntaf a diwethaf";
+        var EDIT = "Golygu";
+        var DELETE = "Dileu";
+        var SAVE = "Cadw";
+        var CANCEL = "Diddymu";
+    }else if (language == "sg"){
+        var ACCOUNT_NO = "Àireamh Cunntais";
+        var FIRST_NAME = "Ciad Ainm";
+        var FULL_NAME = "Ainm Làn";
+        var LAST_NAME = "Ainm mu dheireadh";
+        var CONFIG = "Configuration";
+        var ADD = "Cuir ris";
+        var SEARCH = "Rannsaich";
+        var USER_MANAGER = "Manaidsear Cleachdaiche";
+        var ALERT = "Cuir a-steach a 'chiad ainm is an t-ainm mu dheireadh";
+        var EDIT = "Deasaich";
+        var DELETE = "Sguab às às";
+        var SAVE = "Sàbhail";
+        var CANCEL = "Sguir dheth";
     }
 
 

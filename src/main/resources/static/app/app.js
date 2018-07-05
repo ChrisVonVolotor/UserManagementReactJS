@@ -198,20 +198,22 @@ var UsersTable = React.createClass({
         });
         //var rows[] = this.props.rows;
         return (
-            <div className="container w-80">
-
-                <h1>{languageJSON.title}</h1>
-                <form className="">
-                    <div className="radio-button" onChange={this.setSearch.bind(this)}>
-                        <label className="radio-button" htmlFor="SearchAll"> {languageJSON.fullName} <input type="radio" value="SearchAll" id="SearchAll" name="searchType" defaultChecked/>&nbsp;&nbsp;</label>
-                        <label className="radio-button" htmlFor="SearchFirst"> {languageJSON.fName} <input type="radio" value="SearchFirst" id="SearchFirst" name="searchType"/>&nbsp;&nbsp;</label>
-                        <label className="radio-button" htmlFor="SearchLast"> {languageJSON.lName} <input type="radio" value="SearchLast" id="SearchLast" name="searchType"/>&nbsp;&nbsp;</label>
+            <div className="container">
+                <h1><i className="fas fas-address-book"/> {languageJSON.title}</h1>
+                <form className="form-group">
+                    <div className="radio-button mbody" onChange={this.setSearch.bind(this)}>
+                        <label className="form-check-label" htmlFor="SearchAll"> {languageJSON.fullName} <input type="radio" value="SearchAll" id="SearchAll" name="searchType" defaultChecked/>&nbsp;&nbsp;</label>
+                        <label className="form-check-label" htmlFor="SearchFirst"> {languageJSON.fName} <input type="radio" value="SearchFirst" id="SearchFirst" name="searchType"/>&nbsp;&nbsp;</label>
+                        <label className="form-check-label" htmlFor="SearchLast"> {languageJSON.lName} <input type="radio" value="SearchLast" id="SearchLast" name="searchType"/>&nbsp;&nbsp;</label>
                         <select id="selectBox" className="form-control-sm float-right" onChange={this.changeLanguage} defaultValue={this.state.language}>
                             <option value="ar">عربى</option>
                             <option value="bg">български</option>
+                            <option value="de">Deutsche</option>
                             <option value="en">English</option>
                             <option value="es">Español</option>
                             <option value="fr">français</option>
+                            <option value="sg">gàidhlig</option>
+                            <option value="he">עִברִית</option>
                             <option value="hi">हिंदी</option>
                             <option value="it">italiano</option>
                             <option value="jp">日本語</option>
@@ -221,13 +223,14 @@ var UsersTable = React.createClass({
                             <option value="ro">Română</option>
                             <option value="ru">русский</option>
                             <option value="sw">Kiswahili</option>
+                            <option value="wl">Cymraeg</option>
                             <option value="zh">中文</option>
                         </select>
                     </div>
                     <br/>
                     <input type="text" placeholder={languageJSON.search}  id="search" className="form-control" ref="searchBar" onKeyUp={this.search}/>
                 </form>
-                <table className="table table-striped">
+                <table className="table table-striped table-hover">
                     <thead>
                     <tr>
                         <th>{languageJSON.accNo}</th>
