@@ -1,4 +1,3 @@
-
 var Users = React.createClass({
     getInitialState: function() {
         return {display: true,
@@ -26,22 +25,27 @@ var Users = React.createClass({
     },
     save: function(){
         this.setState({editing: false});
-        this.props.user.firstName = this.refs.newFName.value;
-        this.props.user.lastName = this.refs.newLName.value;
-        var self = this;
-        $.ajax({
-            url: "http://localhost:8080/users/update/" + this.props.user.accountNumber,
-            type: 'PUT',
-            contentType: "application/json; charset=utf-8",
-            data: JSON.stringify(this.props.user),
-            success: function(result) {
-                //self.setState({display: false});
+        if(this.refs.newFName.value == false || this.refs.newLName.value == false){
+            alert(languageJSON.alert);
+        }else {
+            this.props.user.firstName = this.refs.newFName.value;
+            this.props.user.lastName = this.refs.newLName.value;
+            var self = this;
+            $.ajax({
+                url: "http://localhost:8080/users/update/" + this.props.user.accountNumber,
+                type: 'PUT',
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify(this.props.user),
+                success: function (result) {
+                    result.sort((a,b) => (a.accountNumber) - (b.accountNumber));
+                    //self.setState({display: false});
 
-            },
-            error: function(xhr, ajaxOptions, thrownError) {
-                toastr.error(xhr.responseJSON.message);
-            }
-        });
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    toastr.error(xhr.responseJSON.message);
+                }
+            });
+        }
     },
 
     renderNormal:function(){
@@ -52,8 +56,8 @@ var Users = React.createClass({
                 <td className="td">{this.props.user.firstName}</td>
                 <td className="td">{this.props.user.lastName}</td>
                 <td>
-                    <button className="btn btn-info" onClick={this.handleEdit}>Edit</button>
-                    <button className="btn btn-danger" onClick={this.handleDelete}>Delete</button>
+                    <button className="btn btn-info" onClick={this.handleEdit}>{languageJSON.edit}</button> &nbsp;
+                    <button className="btn btn-danger" onClick={this.handleDelete}>{languageJSON.delete}</button>
                 </td>
             </tr>);
     },
@@ -67,8 +71,8 @@ var Users = React.createClass({
                 <td className="td"><input ref="newFName" defaultValue={this.props.user.firstName}/></td>
                 <td className="td"><input ref="newLName" defaultValue={this.props.user.lastName}/></td>
                 <td>
-                    <button  className="td"className="btn btn-success" onClick={this.save}>Save</button>
-                    <button className="td" className="btn btn-danger" onClick={this.cancel}>Cancel</button>
+                    <button  className="td"className="btn btn-success" onClick={this.save}>{languageJSON.save}</button> &nbsp;
+                    <button className="td" className="btn btn-danger" onClick={this.cancel}>{languageJSON.canc}</button>
 
                 </td>
             </tr>);
@@ -86,22 +90,22 @@ var Users = React.createClass({
 
 });
 
-
-
-
 var UsersTable = React.createClass({
     loadUsersFromServer: function () {
         var self = this;
         $.ajax({
             url: "http://localhost:8080/users/all"
         }).then(function (data) {
+            data.sort((a,b) => (a.accountNumber) - (b.accountNumber));
+
             self.setState({newUserList: data});
 
         });
     },
 
     getInitialState: function () {
-        return {newUserList: []};
+        return {newUserList: [],
+            language: "en"};
     },
 
     componentDidMount: function () {
@@ -135,10 +139,16 @@ var UsersTable = React.createClass({
 
         }
 
+
         var self = this;
         $.ajax({
             url: url
         }).then(function (data) {
+
+
+
+            data.sort((a,b) => (a.accountNumber) - (b.accountNumber));
+
             self.setState({newUserList: data});
 
         });
@@ -147,6 +157,11 @@ var UsersTable = React.createClass({
 
     newUser:function(){
         var self = this;
+
+        if(this.refs.newUserFName.value == false || this.refs.newUserLName.value == false){
+         alert(languageJSON.alert);
+
+        }else{
 
         var data = {
             firstName: this.refs.newUserFName.value,
@@ -158,6 +173,7 @@ var UsersTable = React.createClass({
             contentType: "application/json; charset=utf-8",
             data: JSON.stringify(data),
             success: function(result) {
+                result.sort((a,b) => (a.accountNumber) - (b.accountNumber));
                 self.setState({newUserList: result})
                 window.document.getElementById("newFName").value = "";
                 window.document.getElementById("newLName").value = "";
@@ -167,44 +183,66 @@ var UsersTable = React.createClass({
             }
         });
 
+    }}
+    ,
+    changeLanguage: function(event){
+        this.setState({language: event.target.value});
     },
     render: function () {
-
-
-
-
+        languageJSON = changeLanguage(this.state.language);
+        console.log(changeLanguage(this.state.language));
+        console.log(languageJSON);
         let rows = [];
         this.state.newUserList.forEach(function (user) {
             rows.push(<Users user={user}/>);
         });
         //var rows[] = this.props.rows;
         return (
-            <div className="container">
-                <h1>User Manager</h1>
+            <div className="container w-80">
+
+                <h1>{languageJSON.title}</h1>
                 <form className="">
                     <div className="radio-button" onChange={this.setSearch.bind(this)}>
-                        <label className="radio-button" htmlFor="SearchAll"> Full Name <input type="radio" value="SearchAll" id="SearchAll" name="searchType" defaultChecked/>&nbsp;&nbsp;</label>
-                        <label className="radio-button" htmlFor="SearchFirst"> First Name <input type="radio" value="SearchFirst" id="SearchFirst" name="searchType"/>&nbsp;&nbsp;</label>
-                        <label className="radio-button" htmlFor="SearchLast"> Last Name <input type="radio" value="SearchLast" id="SearchLast" name="searchType"/>&nbsp;&nbsp;</label>
+                        <label className="radio-button" htmlFor="SearchAll"> {languageJSON.fullName} <input type="radio" value="SearchAll" id="SearchAll" name="searchType" defaultChecked/>&nbsp;&nbsp;</label>
+                        <label className="radio-button" htmlFor="SearchFirst"> {languageJSON.fName} <input type="radio" value="SearchFirst" id="SearchFirst" name="searchType"/>&nbsp;&nbsp;</label>
+                        <label className="radio-button" htmlFor="SearchLast"> {languageJSON.lName} <input type="radio" value="SearchLast" id="SearchLast" name="searchType"/>&nbsp;&nbsp;</label>
+                        <select id="selectBox" className="form-control-sm float-right" onChange={this.changeLanguage} defaultValue={this.state.language}>
+                            <option value="ar">عربى</option>
+                            <option value="bg">български</option>
+                            <option value="en">English</option>
+                            <option value="es">Español</option>
+                            <option value="fr">français</option>
+                            <option value="hi">हिंदी</option>
+                            <option value="it">italiano</option>
+                            <option value="jp">日本語</option>
+                            <option value="ko">중국말</option>
+                            <option value="po">Polskie</option>
+                            <option value="pt">Português</option>
+                            <option value="ro">Română</option>
+                            <option value="ru">русский</option>
+                            <option value="sw">Kiswahili</option>
+                            <option value="zh">中文</option>
+                        </select>
                     </div>
-                    <input type="text" placeholder="Search" id="search" className="form-control" ref="searchBar" onKeyUp={this.search}/>
+                    <br/>
+                    <input type="text" placeholder={languageJSON.search}  id="search" className="form-control" ref="searchBar" onKeyUp={this.search}/>
                 </form>
                 <table className="table table-striped">
                     <thead>
                     <tr>
-                        <th>Account No</th>
-                        <th>First Name</th>
-                        <th>Last Name</th>
-                        <th>Config</th>
+                        <th>{languageJSON.accNo}</th>
+                        <th>{languageJSON.fName}</th>
+                        <th>{languageJSON.lName}</th>
+                        <th><i className="fas fa-cog fa-spin"/> {languageJSON.config}</th>
                     </tr>
                     </thead>
                     <tbody>{rows}
                     <tr>
-                        <td>*</td>
+                        <td><i className="fas fa-asterisk text-muted" /></td>
                         <td className="td"><input id="newFName" ref="newUserFName"/></td>
                         <td className="td"><input id="newLName" ref="newUserLName"/></td>
                         <td>
-                            <button  className="td" className="btn btn-primary" onClick={this.newUser}>Add</button>
+                            <button className="btn btn-primary" onClick={this.newUser}>{languageJSON.add}</button>
                         </td>
                     </tr>
                     </tbody>
@@ -214,6 +252,5 @@ var UsersTable = React.createClass({
     },
 
 });
-
 
 ReactDOM.render(<UsersTable />, document.getElementById('root') );
