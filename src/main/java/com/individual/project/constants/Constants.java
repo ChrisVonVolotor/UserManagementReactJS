@@ -11,4 +11,11 @@ public interface Constants {
     static final String UPDATE_USER = "/update/{exact}";
     static final String DELETE_USER = "/delete/{accountNumber}";
 
+    static final String TRANSLATIONS = "/translations";
+    static final String GET_ALL_TRANS = "/all";
+    static final String GET_THIS_TRANS = "/{lang}";
+    static final String ADD_TRANS = "/create";
+
+
+
 }
