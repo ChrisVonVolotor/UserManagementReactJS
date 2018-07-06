@@ -88,4 +88,3 @@ function changeLanguage(x){
     return rtn;
 }
 
-//populateDatabase();
